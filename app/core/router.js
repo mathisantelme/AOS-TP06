@@ -28,6 +28,7 @@ server.use(restify.plugins.queryParser()); // needed for query parameter request
 // c'est ici que l'on lit les route aux fonctions
 server.get("/api/book", controllers.BookController.getBook); // permet de retourner tous les livres présents
 server.get("/api/book/:isbn", controllers.BookController.getBook); // permet de retourner un livre spécifique
+server.post("/api/book", controllers.BookController.createBook); // permet la création d'un livre
 
 var port = process.env.PORT || 3000;
 

@@ -42,9 +42,26 @@ exports.getBook = function (req, res, next) {
             if (err){
                 return next(err);  
             } else {
-                res.json(book);
+                res.json(200, book);
                 return next();
             }    
         }, isbn);
     }    
+};
+
+/**
+ * Creates à new book using isbn, title, authorname and price
+ */
+exports.createBook = function (req, res, next) {
+    var p_book = new BookModel.Book(req.body.isbn, req.body.title, req.body.authors, req.body.price);
+    
+    // on récupère les informations contenues par la requete
+    BookModel.createBook(function (err, book) {
+        if (err) {
+            res.json(409);
+            return next(err);
+        }
+        res.json(200, book);
+        return next();
+    }, p_book);
 };

@@ -1,5 +1,6 @@
 let fs = require('fs'),
-    PersonModel = require(process.cwd() + "/app/models/Person.js");
+    PersonModel = require(process.cwd() + "/app/models/Person.js"),
+    errs = require('restify-errors');
 
 // global book array
 let books = []
@@ -54,3 +55,18 @@ exports.getOneBook = function (callback, isbn) {
             callback(null, book);
     });
 };
+
+/**
+ * Create the specified book object
+ */
+exports.createBook = function (callback, p_book) {
+    // on vérifie si un livre possèdant le meme isbn existe déjà dans les objets chargés, si c'est le cas, alors on annule la création
+    books.forEach(book => {
+        if (book.isbn == p_book.isbn)
+            callback(new errs.ConflictError("Book already present"));
+    });
+
+    // on ajout le livre s'il n'est pas déjà présent
+    books.push(p_book);
+    callback(null, p_book);
+}
