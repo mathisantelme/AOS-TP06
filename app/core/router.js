@@ -29,7 +29,7 @@ server.use(restify.plugins.queryParser()); // needed for query parameter request
 server.get("/api/book", controllers.BookController.getBook); // permet de retourner tous les livres présents
 server.get("/api/book/:isbn", controllers.BookController.getBook); // permet de retourner un livre spécifique
 server.post("/api/book", controllers.BookController.createBook); // permet la création d'un livre
-
+server.put("/api/book/:isbn", controllers.BookController.modifyBook); // permet de modifier un livre spécifique
 var port = process.env.PORT || 3000;
 
 server.listen(port, function (err) {

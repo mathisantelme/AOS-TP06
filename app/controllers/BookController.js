@@ -60,8 +60,23 @@ exports.createBook = function (req, res, next) {
         if (err) {
             res.json(409);
             return next(err);
+        } else {
+            res.json(200, book);
+            return next();
+        }
+    }, p_book);
+};
+
+/**
+ * Modify a specified book
+ */
+exports.modifyBook = function (req, res, next) {
+    BookModel.modifyBook(function (err, book) {
+        if (err) {
+            res.json(409);
+            return next(err);
         }
         res.json(200, book);
         return next();
-    }, p_book);
-};
+    }, req.body.isbn, req.body.title, req.body.authors, req.body.price);
+}

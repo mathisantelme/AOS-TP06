@@ -60,13 +60,60 @@ exports.getOneBook = function (callback, isbn) {
  * Create the specified book object
  */
 exports.createBook = function (callback, p_book) {
+    let found = false;
     // on vérifie si un livre possèdant le meme isbn existe déjà dans les objets chargés, si c'est le cas, alors on annule la création
     books.forEach(book => {
         if (book.isbn == p_book.isbn)
-            callback(new errs.ConflictError("Book already present"));
+            found = true;
     });
 
-    // on ajout le livre s'il n'est pas déjà présent
-    books.push(p_book);
-    callback(null, p_book);
-}
+    if (found) {
+        return callback(new errs.ConflictError("Book already present"));
+    } else {
+        // on ajout le livre s'il n'est pas déjà présent
+        books.push(p_book);
+        return callback(null, p_book);
+    } 
+};
+
+/**
+ * Create the specified book object
+ */
+exports.removeBook = function (callback, isbn) {
+    let found = false;
+    books.forEach(book => {
+        if (book.isbn == p_book.isbn)
+            found = true;
+    });
+
+    if (found) {
+        return callback(new errs.ConflictError("Book already present"));
+    } else {
+        // on ajout le livre s'il n'est pas déjà présent
+        books.push(p_book);
+        return callback(null, p_book);
+    } 
+};
+
+/**
+ * Modify a book's values
+ */
+exports.modifyBook = function (callback, isbn, title, authors, price) {
+    let tmpBook;
+    let found = false;
+
+    books.forEach(book => {
+        if (book.isbn == isbn) {
+            found = true;
+           tmpBook = book; 
+        }
+    });
+    if (found) {
+        tmpBook.title = title;
+        tmpBook.authors = authors;
+        tmpBook.price = price;
+        return callback(null, tmpBook);
+    } else {
+        return callback(new errs.ConflictError("Book not present"));
+    }
+};

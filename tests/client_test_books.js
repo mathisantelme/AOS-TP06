@@ -45,7 +45,7 @@ async.seq(
             callback(null, tst + ' ' + 'test4');
         })
     },
-    /* uncomment the following tests
+    
     function (tst, callback) {
         // retrieving a newly created resource
         client.get('/api/book/ZT58', function (err, req, res, book) {
@@ -55,6 +55,8 @@ async.seq(
             callback(null, tst + ' ' + 'test5');
         })
     },
+    
+    /* uncomment the following tests
     function (tst, callback) {
         // delete book ZT58
         client.del('/api/book/ZT58', function (err, req, res, book) {
@@ -76,7 +78,7 @@ async.seq(
         // updating book ZT56
         client.put('/api/book/ZT56', {"title": "Roman"}, function (err, req, res, updatedBook) {
             assert.ifError(err);
-            //console.log('put %j', updatedBook);
+            console.log('put %j', updatedBook);
             assert.deepEqual(updatedBook, {isbn: "ZT56", title: "Roman",authors:[{id:1},{id:2}],price:12.4}, 'Pb put (test8)');
             callback(null, tst + ' ' + 'test8');
         })
