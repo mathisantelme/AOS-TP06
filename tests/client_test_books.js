@@ -18,7 +18,6 @@ async.seq(
             callback(null, 'test1');
         })
     },
-    /* uncomment the following tests
     function (tst, callback) {
         // retrieving an specific book resource
         client.get('/api/book/ZT56', function (err, req, res, book) {
@@ -28,6 +27,7 @@ async.seq(
             callback(null, tst + ' ' + 'test2');
         })
     },
+    /* uncomment the following tests
     function (tst, callback) {
         // creating a new resource
         client.post('/api/book', {isbn: "ZT58", title: "Nouvelle", authors:[{id:2}],price:15}, function (err, req, res, book) {

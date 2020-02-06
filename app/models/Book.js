@@ -5,7 +5,7 @@ let fs = require('fs'),
 let books = []
 
 /**
- * Book cst
+ * Book constructor
  */
 exports.Book = function Book(isbn, title, authors, price) {
     this.isbn = isbn;
@@ -43,4 +43,14 @@ exports.saveBooks = function () {
  */
 exports.getBooks = function (callback) {
     callback(null,books);
+};
+
+/**
+ * Get the specified Book object
+ */
+exports.getOneBook = function (callback, isbn) {
+    books.forEach(book => {
+        if (book.isbn == isbn)
+            callback(null, book);
+    });
 };
